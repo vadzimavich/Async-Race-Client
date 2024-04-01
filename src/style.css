@@ -3,3 +3,12 @@
   padding: 0px;
   box-sizing: border-box;
 }
+
+html {
+  font-size: 16px;
+}
+
+body {
+  color: #222;
+  background-color: #FEA;
+}
