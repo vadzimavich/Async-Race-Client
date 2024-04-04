@@ -5,6 +5,7 @@ export interface CarBasic {
 
 export interface Car extends CarBasic {
   id: number;
+  isEngineStarted: boolean;
 }
 
 export interface Cars {

@@ -1,4 +1,4 @@
-export const renderCarImage = (color: string): string => `
+export const renderCarImage = (color) => `
   <svg version="1.1" id="car-image" xmlns="http://www.w3.org/2000/svg" x="0" y="0" viewBox="0 0 100 100"
     xml:space="preserve">
     <path
@@ -43,8 +43,7 @@ export const renderCarImage = (color: string): string => `
     <path fill=""${color}" d="M18.7 46.2l-2.9 2.5-4.9-8.1 1.9-1.6z" />
   </svg>
 `;
-
-export const renderFinishImage = (): string => `
+export const renderFinishImage = () => `
   <svg version="1.1" id="finish-image" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
   viewBox="0 0 297 297" xml:space="preserve">
     <g>
@@ -182,32 +181,4 @@ export const renderFinishImage = (): string => `
     </g>
     </g>
   </svg>
-`;
-
-export const renderCar = ({
-  id,
-  name,
-  color,
-  isEngineStarted,
-}: {
-  id: string;
-  name: string;
-  color: string;
-  isEngineStarted: boolean;
-}): string => `
-  <div class="garage-list-item-header">
-    <button class="btn select" id="select-${id}">Select</button>
-    <button class="btn remove" id="remove-${id}">Remove</button>
-    <span class="garage-list-item-car-name">${name}</span>
-  </div>
-  <div class="garage-list-item-race">
-    <button class="btn start" id="start-${id} ${isEngineStarted ? 'disabled' : ''}">A</button>
-    <button class="btn stop" id="stop-${id} ${isEngineStarted ? 'disabled' : ''}">B</button>
-    <div class="garage-list-item-car-image" id="car-image-${id}">
-      ${renderCarImage(color)}
-    </div>
-    <div class="garage-list-item-finish id="finish-${id}">
-      ${renderFinishImage()}
-    </div>
-  </div>
 `;
