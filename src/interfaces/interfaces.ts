@@ -1,7 +1,7 @@
 export interface CarBasic {
   name: string;
   color: string;
-};
+}
 
 export interface Car extends CarBasic {
   id: number;

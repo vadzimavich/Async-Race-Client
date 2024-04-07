@@ -1,9 +1,9 @@
-import { Car } from '../interfaces/interfaces'
-
-import { renderCarImage, renderFinishImage } from './svg';
+import { Car } from '../interfaces/interfaces';
+import { renderCarImage, renderFinishImage } from '../assets/svg';
 
 class Page {
-
+  static pagesLimit = 10;
+  
   createMain() {
     const main = document.createElement('main');
     main.classList.add('container');
@@ -31,7 +31,7 @@ class Page {
           <input 
             type="text" 
             class="generator-text"
-            id="create-name">
+            id="create-name"
             required
           >
           <input 
@@ -46,7 +46,7 @@ class Page {
           <input 
             type="text" 
             class="generator-text"
-            id="update-name">
+            id="update-name"
             required
           >
           <input 
@@ -68,37 +68,44 @@ class Page {
     let cars = '';
     const carsCount = data.length;
     data.forEach((car) => {
-      cars += this.createCar(car.name, car.color, car.id, car.isEngineStarted);
+      cars += this.createCar(car.name, car.color, car.id);
     });
     garage.innerHTML = `
     <h1 class="garage-header-cars-counter">Garage (${carsCount} cars)</h2>
-    <p class="garage-header-page-counter">Page #{pageCount}</p>
+    <p class="garage-header-page-counter">Page #{Service.pageNumber}</p>
     <ul class="garage-list">
-      <li class="garage-list-item">${cars}</li>
+      ${cars}
     </ul>
     `;
     return garage;
   }   
 
-  createCar(name: string, color: string, id: number, isEngineStarted: boolean) {
+  createCar(name: string, color: string, id: number) {
     const car = `
-    <div class="garage-list-item-header">
-      <button class="btn select" id="select-${id}">Select</button>
-      <button class="btn remove" id="remove-${id}">Remove</button>
-      <span class="garage-list-item-car-name">${name}</span>
-    </div>
-    <div class="garage-list-item-race">
-      <button class="btn start" id="start-${id} ${isEngineStarted ? 'disabled' : ''}">A</button>
-      <button class="btn stop" id="stop-${id} ${isEngineStarted ? 'disabled' : ''}">B</button>
-      <div class="garage-list-item-car-image" id="car-image-${id}">
-        ${renderCarImage(color)}
+    <li class="garage-list-item">
+      <div class="garage-list-item-header">
+        <button class="btn select" id="select-${id}">Select</button>
+        <button class="btn remove" id="remove-${id}">Remove</button>
+        <span class="garage-list-item-car-name">${name}</span>
       </div>
-      <div class="garage-list-item-finish id="finish-${id}">
-        ${renderFinishImage()}
+      <div class="garage-list-item-race">
+        <button class="btn start" id="start-${id}}">A</button>
+        <button class="btn stop" id="stop-${id}}">B</button>
+        <div class="garage-list-item-car-image" id="car-image-${id}">
+          ${renderCarImage(color)}
+        </div>
+        <div class="garage-list-item-finish id="finish-${id}">
+          ${renderFinishImage()}
+        </div>
       </div>
-    </div>
+    </li>
     `;
     return car;
+  }
+
+  addCar(name: string, color: string, id: number) {
+    const garage = document.querySelector('.garage-list') as HTMLUListElement;
+    garage.innerHTML += this.createCar(name, color, id);
   }
 
   createControls() {

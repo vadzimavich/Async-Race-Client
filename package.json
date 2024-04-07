@@ -1,40 +1,44 @@
 {
   "name": "async-race-client",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "RS School Project",
+  "main": "webpack.config.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "webpack-dev-server --open",
-    "build": "webpack --mode=production",
-    "lint": "eslint . --ext .ts",
-    "format": "prettier --write \"src/**/*.{ts,tsx}\""
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [],
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vadzimavich/Async-Race-Client.git"
+  },
+  "author": "vadzimavich",
   "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/vadzimavich/Async-Race-Client/issues"
+  },
+  "homepage": "https://github.com/vadzimavich/Async-Race-Client#readme",
   "devDependencies": {
-    "@typescript-eslint/eslint-plugin": "^7.4.0",
-    "@typescript-eslint/parser": "^7.4.0",
+    "@typescript-eslint/eslint-plugin": "^7.5.0",
+    "@typescript-eslint/parser": "^7.5.0",
     "clean-webpack-plugin": "^4.0.0",
-    "eslint": "^8.2.0",
+    "copy-webpack-plugin": "^12.0.2",
+    "css-loader": "^7.0.0",
+    "eslint": "^8.57.0",
     "eslint-config-airbnb-base": "^15.0.0",
     "eslint-config-airbnb-typescript": "^18.0.0",
-    "eslint-config-airbnb-typescript-base": "^5.0.1",
-    "eslint-config-prettier": "^9.1.0",
-    "eslint-plugin-import": "^2.25.2",
-    "eslint-plugin-prettier": "^5.1.3",
+    "eslint-plugin-import": "^2.29.1",
+    "eslint-webpack-plugin": "^4.1.0",
+    "html-loader": "^5.0.0",
     "html-webpack-plugin": "^5.6.0",
     "mini-css-extract-plugin": "^2.8.1",
+    "postcss-loader": "^8.1.1",
     "prettier": "^3.2.5",
+    "sass": "^1.74.1",
+    "sass-loader": "^14.1.1",
+    "style-loader": "^3.3.4",
     "ts-loader": "^9.5.1",
-    "typescript": "^5.4.3",
+    "typescript": "^5.4.4",
     "webpack": "^5.91.0",
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^5.0.4"
-  },
-  "dependencies": {
-    "css-minimizer-webpack-plugin": "^6.0.0",
-    "eslint-webpack-plugin": "^4.1.0"
   }
 }

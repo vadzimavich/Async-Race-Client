@@ -1,95 +1,75 @@
-const path = require('path')
-const HTMLWebpackPlugin = require('html-webpack-plugin')
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const path = require('path');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyPlugin = require('copy-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
-module.exports = {
-    mode: mode,
-    context: path.resolve(__dirname, 'src'),
-    entry: {
-        main: './index',
-    },
-    output: {
-        filename: '[name].[contenthash].js',
-        path: path.resolve(__dirname, 'dist'),
-        assetModuleFilename: 'assets/[hash][ext][query]',
-        clean: true,
-    },
-    devtool: 'source-map',
-    optimization: {
-        splitChunks: {
-            chunks: 'all',
-        },
-    },
-    experiments: {
-        topLevelAwait: true,
-    },
-    plugins: [
-        new MiniCssExtractPlugin({
-            filename: '[name].[contenthash].css',
-        }),
-        new HTMLWebpackPlugin({
-            template: './index.html',
-        }),
+const esLintPlugin = (isDev) => isDev ? [] : [ new ESLintPlugin({ extensions: ['ts', 'js'] }) ];
+
+const devServer = (isDev) => !isDev ? {} : {
+  devServer: {
+    open: true,
+    hot: true,
+    port: 8080
+   },
+  };
+  module.exports = (env) => ({
+   mode: env.development ? 'development' : 'production',
+   entry: './src/index.ts',
+   output: {
+      filename: 'index.js',
+      path: path.resolve(__dirname, 'dist'),
+      assetModuleFilename: 'assets/[name][ext]',
+   },
+  module: {
+    rules: [
+       {
+        test: /\.html$/,
+        use: 'html-loader',
+       }, 
+       {
+        test: /\.[tj]s$/i,
+        use: 'ts-loader',
+        exclude: /node_modules/,
+       },
+       {
+        test: /\.(?:ico|gif|png|jpg|jpeg|svg)$/i,
+        type: 'asset/resource',
+       },
+       {
+        test: /\.(woff(2)?|eot|ttf|otf)$/i,
+        type: 'asset/resource',
+       },
+       {
+        test: /\.css$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader'],
+       },
+       {
+        test: /\.s[ac]ss$/i,
+        use: [MiniCssExtractPlugin.loader, 'css-loader', 'sass-loader']
+       },
     ],
-    devServer: {
-        open: true,
-        hot: true,
-        port: 'auto',
-        static: {
-            directory: './src',
-            watch: true,
-        },
-    },
-
-    resolve: {
-        extensions: ['.tsx', '.ts', '.js'],
-    },
-
-    module: {
-        rules: [
-            {
-                test: /\.tsx?$/i,
-                use: 'ts-loader',
-                exclude: /node_modules/,
-            },
-            {
-                test: /\.html$/i,
-                loader: 'html-loader',
-            },
-            {
-                test: /\.(sa|sc|c)ss$/,
-                use: [
-                    mode === 'development' ? 'style-loader' : MiniCssExtractPlugin.loader,
-                    'css-loader',
-                    { loader: 'postcss-loader' },
-                    'sass-loader',
-                ],
-            },
-            {
-                test: /\.(png|svg|jpg|jpeg|gif)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.(woff|woff2|eot|tts|otf)$/i,
-                type: 'asset/resource',
-            },
-            {
-                test: /\.(mp3|waw)$/i,
-                type: 'asset/resource',
-                generator: {
-                    filename: 'audio/[name][ext]',
-                },
-            },
-            {
-                test: /\.m?js$/,
-                exclude: /node_modules/,
-                use: {
-                    loader: 'babel-loader',
-                    options: {
-                        presets: ['@babel/preset-env'],
-                    },
-                },
-            },
-        ],
-    },
-}
+  },
+  resolve: {
+    extensions: ['.ts', '.js'],
+  },
+  plugins: [
+    new HtmlWebpackPlugin({
+      template: path.resolve(__dirname, './src/index.html'),
+      filename: 'index.html',
+    }),
+    new MiniCssExtractPlugin({ filename: '[name].css' }),
+    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }),
+    ...esLintPlugin(env.development),
+      // new CopyPlugin({
+      //    patterns: [
+      //     {
+      //      from: path.resolve(__dirname, 'src/assets'),
+      //      to: path.resolve(__dirname, 'dist/assets')
+      //     },
+      //    ],
+      // }),
+ ],
+ ...devServer(env.development)
+});
