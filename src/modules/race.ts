@@ -8,7 +8,7 @@ class Race {
   page: Page;
 
   service: Service;
-  
+
   body: HTMLElement;
 
   constructor() {
@@ -31,15 +31,16 @@ class Race {
 
   startEvents() {
     const createNameInput = document.querySelector('#create-name') as HTMLInputElement;
-    const createColorInput = document.querySelector('#create-name') as HTMLInputElement;
-    const updateNameInput = document.querySelector('#create-name') as HTMLInputElement;
-    const updateColorInput = document.querySelector('#create-name') as HTMLInputElement;
+    const createColorInput = document.querySelector('#create-color') as HTMLInputElement;
+    const updateNameInput = document.querySelector('#update-name') as HTMLInputElement;
+    const updateColorInput = document.querySelector('#update-color') as HTMLInputElement;
     this.body.addEventListener('click', (e) => {
       const target = e.target as HTMLElement;
-      if (target && target.classList.contains('.btn.create')) {
+      if (target && target.classList.contains('create')) {
         this.service.createCar(target, createNameInput.value, createColorInput.value);
+        this.service.updateGarage();
       }
-      if (target && target.classList.contains('.btn.update')) {
+      if (target && target.classList.contains('update')) {
         this.service.updateCar(target, updateNameInput .value, updateColorInput.value, this.service.id);
       }
     });

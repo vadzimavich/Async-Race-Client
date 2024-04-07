@@ -15,8 +15,8 @@ class Page {
     header.classList.add('header');
     header.innerHTML = `
       <header class="header">
-        <button class="btn garage">To Garage</button>
-        <button class="btn winners">To Winners</button>
+        <button class="btn togarage">To Garage</button>
+        <button class="btn towinners">To Winners</button>
       </header>
     `;
     return header;

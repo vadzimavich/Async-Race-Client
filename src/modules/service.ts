@@ -20,12 +20,10 @@ class Service {
     this.carNumber = 1;
   }
 
-  async createCar(btn: HTMLElement, name: string, color: string) {
-    await this.api
-    .carPost(name, color)
-    .then((data) => {
-      this.page.addCar(data.name, data.color, data.id);
-    });
+  async createCar(btn: HTMLElement, name: string, color: string): Promise<void> {
+    const data = await this.api.carPost(name, color);
+    this.page.addCar(data.name, data.color, data.id);
+    this.updateGarage();
   }
 
   async updateCar(btn: HTMLElement, name: string, color: string, id: string) {
@@ -39,9 +37,22 @@ class Service {
         carName.textContent = name;
         carColor.style.fill = color;
         });
+      this.updateGarage();
     }
   }
   // async deleteCar(item: HTMLElement) {
   //
+  
+  async updateGarage() {
+    const garage = document.querySelector('.garage-list') as HTMLUListElement;
+    const page = document.querySelector('.garage-header-page-counter') as HTMLParagraphElement;
+    const data = await this.api.carsGet(this.pageNumber);
+    garage.innerHTML = '';
+    data.forEach((item) => {
+      garage.innerHTML += `${this.page.createCar(item.name, item.color, item.id)}`;
+    });
+    page.innerHTML = `Page# ${this.pageNumber}`;
+  }
+
 }
 export default Service;
