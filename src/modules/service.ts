@@ -51,7 +51,7 @@ class Service {
     data.forEach((item) => {
       garage.innerHTML += `${this.page.createCar(item.name, item.color, item.id)}`;
     });
-    page.innerHTML = `Page# ${this.pageNumber}`;
+    page.innerHTML = `Page #${this.pageNumber}`;
   }
 
 }

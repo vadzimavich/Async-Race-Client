@@ -15,8 +15,8 @@ class Page {
     header.classList.add('header');
     header.innerHTML = `
       <header class="header">
-        <button class="btn togarage">To Garage</button>
-        <button class="btn towinners">To Winners</button>
+        <button class="btn togarage">🚘 To Garage</button>
+        <button class="btn towinners">🏆 To Winners</button>
       </header>
     `;
     return header;
@@ -38,9 +38,9 @@ class Page {
             type="color" 
             class="generator-color"
             id="create-color"
-            value="#ffffff"
+            value="#00eedd"
           >
-          <button class="btn create" type="submit">Create</button>
+          <button class="btn create" type="submit">🆕 Create</button>
         </div>
         <div class="generator-update">
           <input 
@@ -53,9 +53,9 @@ class Page {
             type="color" 
             class="generator-color"
             id="update-color"
-            value="#ffffff"
+            value="#00eedd"
           >
-          <button class="btn update">Update</button>
+          <button class="btn update">🔄 Update</button>
         </div>
       </section>
     `;
@@ -72,7 +72,7 @@ class Page {
     });
     garage.innerHTML = `
     <h1 class="garage-header-cars-counter">Garage (${carsCount} cars)</h2>
-    <p class="garage-header-page-counter">Page #{Service.pageNumber}</p>
+    <p class="garage-header-page-counter">Page #</p>
     <ul class="garage-list">
       ${cars}
     </ul>
@@ -84,13 +84,13 @@ class Page {
     const car = `
     <li class="garage-list-item">
       <div class="garage-list-item-header">
-        <button class="btn select" id="select-${id}">Select</button>
-        <button class="btn remove" id="remove-${id}">Remove</button>
+        <button class="btn select" id="select-${id}">👇🏻 Select</button>
+        <button class="btn remove" id="remove-${id}">🗑️ Remove</button>
         <span class="garage-list-item-car-name">${name}</span>
       </div>
       <div class="garage-list-item-race">
-        <button class="btn start" id="start-${id}}">A</button>
-        <button class="btn stop" id="stop-${id}}">B</button>
+        <button class="btn start" id="start-${id}}">🔑</button>
+        <button class="btn stop" id="stop-${id}}">⛔</button>
         <div class="garage-list-item-car-image" id="car-image-${id}">
           ${renderCarImage(color)}
         </div>
@@ -113,9 +113,9 @@ class Page {
     controls.classList.add('controls');
     controls.innerHTML = `
       <section class="controls">
-      <button class="btn race" id="race">Race</button>
-      <button class="btn reset" id="reset" disabled>Reset</button>
-      <button class="btn generate" id="generate">Generate</button>
+      <button class="btn race" id="race">🏁 Race</button>
+      <button class="btn reset" id="reset" disabled>↩️ Reset</button>
+      <button class="btn generate" id="generate">🧬 Generate</button>
     </section>
     `;
     return controls;

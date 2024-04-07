@@ -77,19 +77,22 @@ li {
   border-bottom: 4px dashed #f0f0f0;
 }
 
+.garage-list-item-header {
+  padding-top: 1.5vh;
+}
+
 .garage-list-item-race {
   display: flex;
-  align-items: start;
+  align-items: center;
+  height: 8vh;
 }
 
 .garage-list-item-car-image {
-  width: 85px;
-  height: 85px;
+  width: 12vh;
 }
 
 .garage-list-item-finish {
-  width: 75px;
-  height: 75px;
+  width: 7vh;
   position: absolute;
   right: 10%;
 }
@@ -99,7 +102,7 @@ li {
   outline: none;
   cursor: pointer;
   font-size: 16px;
-  line-height: 15px;
+  line-height: 2.5vh;
   font-weight: 400;
   border-radius: 8px;
   padding: 10px 10px;
@@ -115,9 +118,49 @@ li {
 }
 
 .btn:disabled {
+  min-width: 120px;
   color: #fff;
   background: linear-gradient(to right, rgb(146, 134, 137) 0%, rgb(95, 89, 91) 50%, rgb(73, 71, 72) 100%);
 }
+
+.btn.start,
+.btn.stop {
+  width: 6vh;
+  height: 6vh;
+  border-radius: 100px;
+  margin-right: 1vh;
+}
+
+.btn.start:hover,
+.btn.stop:hover {
+  background: #ffb300;
+}
+
+.btn.start {
+  background: #178d00;
+}
+
+.btn.stop {
+  background: #b51e3b;
+}
+
+.btn.togarage,
+.btn.towinners,
+.btn.race,
+.btn.generate {
+  min-width: 120px;
+  color: #fff;
+  background: linear-gradient(to right, rgb(29, 75, 77) 0%, rgb(42, 117, 64) 50%, rgb(39, 125, 77) 100%);
+}
+
+.btn.select,
+.btn.remove,
+.btn.create,
+.btn.update {
+  min-width: 120px;
+}
+
+
 
 @keyframes slidein {
   from {
